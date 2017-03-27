@@ -1,0 +1,28 @@
+{
+  "name": "music-app",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "himanshumaheshwari <animatorhimanshu.ksj@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "public/bower_components"
+  ],
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-animate": "^1.6.3",
+    "angular-route": "^1.6.3",
+    "jquery": "^3.2.0",
+    "animate.css": "^3.5.2",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "fontawesome#^4.7.0",
+    "angular-resource": "^1.6.3"
+  }
+}

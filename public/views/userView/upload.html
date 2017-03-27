@@ -1,0 +1,80 @@
+<script src="bower_components/audio-metadata/bin/audio-metadata.js"></script>
+<input type="file" id="inputAudio" onchange="previewFile()">
+<audio id="sound" controls></audio>
+
+<p id="demo"></p>
+
+<script>
+    document.getElementById("inputAudio").accept = "audio/*";
+    document.querySelector('input[type="file"]').onchange = function(e) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            var dv = new jDataView(this.result);
+
+            // "TAG" starts at byte -128 from EOF.
+            // See http://en.wikipedia.org/wiki/ID3
+            if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
+                var title = dv.getString(30, dv.tell());
+                var artist = dv.getString(30, dv.tell());
+                var album = dv.getString(30, dv.tell());
+                var year = dv.getString(4, dv.tell());
+
+                console.log(title+' : '+artist +' : '+ album+' : '+year);
+
+            } else {
+                // no ID3v1 data found.
+            }
+        };
+
+        reader.readAsArrayBuffer(this.files[0]);
+    };
+/*    function myFunction(){
+        var x = document.getElementById("inputAudio");
+        var txt = "";
+        if ('files' in x) {
+            if (x.files.length == 0) {
+                txt = "Select one or more files.";
+            } else {
+                for (var i = 0; i < x.files.length; i++) {
+                    txt += "<br><strong>" + (i+1) + ". file</strong><br>";
+                    var file = x.files[i];
+                    if ('name' in file) {
+                        txt += "name: " + file.name + "<br>";
+                    }
+                    if ('size' in file) {
+                        txt += "size: " + file.size + " bytes <br>";
+                    }
+                }
+            }
+        }
+        else {
+            if (x.value == "") {
+                txt += "Select one or more files.";
+            } else {
+                txt += "The files property is not supported by your browser!";
+                txt  += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead.
+            }
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
+
+    function previewFile() {
+        var preview = document.querySelector('audio');
+        var file    = document.querySelector('input[type=file]').files[0];
+        var reader  = new FileReader();
+
+        reader.addEventListener("load", function () {
+            preview.src = reader.result;
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+
+
+
+
+    }*/
+
+</script>
